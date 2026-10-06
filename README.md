@@ -4,9 +4,7 @@
 
 **Headline finding:** felonies grew from about **1 in 5** Bronx arrests (22.4% in 2011) to about **2 in 5** (39.9% in 2025), even as total arrests fell. Most of the shift happened between 2015 and 2021.
 
-**Live dashboard:** [Tableau Public — add link here]
-
-![Felony share of Bronx arrests](images/felony_share.png)
+**Live dashboard:** coming soon (Tableau Public)
 
 **Tools:** SQL (DuckDB / MotherDuck), Tableau Public, GitHub
 **SQL skills shown:** data-quality checks, deduplication with window functions, CTE pipelines, `LAG`, `RANK`, `SUM() OVER (PARTITION BY …)`, joins, rates per 100,000
@@ -17,14 +15,14 @@
 
 | # | Finding | Evidence |
 | --- | --- | --- |
-| 1 | **The mix shifted toward serious offenses.** Felony share rose from a low of 22.4% (2011) to a peak of 43.8% (2021) and was 39.9% in 2025. | `03_felony_share.sql` |
-| 2 | **Total arrests fell by two-thirds, then partly rebounded.** 100,535 in 2010 → 32,724 in 2020 (−67%) → 62,833 in 2025, still about 38% below the peak. | `04_severity_trend.sql` |
-| 3 | **Felony arrests are at a near-20-year high.** 25,077 in 2025, the most since 2007 and 43% above 2019. | `04_severity_trend.sql` |
-| 4 | **Drug arrests went from the largest category to a small one.** 35.2% of arrests in 2007 → 5.6% in 2022 (33,668 → 2,463 arrests). The decline began around 2012, well before marijuana legalization in 2021. | `05_drug_share.sql` |
-| 5 | **The Bronx has the highest arrest rate per resident.** 4,266.7 arrests per 100,000 residents in 2025, ahead of Manhattan (3,922.0) and 46% above Brooklyn. It has ranked first every year since 2022. | `07_borough_rates.sql` |
-| 6 | **Arrests concentrate in the same precincts.** Precincts 46, 44, 40, 43 and 52 were the top five in both 2006 and 2007. | `06_top_precincts.sql` |
+| 1 | **The mix shifted toward serious offenses.** Felony share rose from a low of 22.4% (2011) to a peak of 43.8% (2021) and was 39.9% in 2025. | [`03_felony_share.sql`](sql/03_felony_share.sql) |
+| 2 | **Total arrests fell by two-thirds, then partly rebounded.** 100,535 in 2010 → 32,724 in 2020 (−67%) → 62,833 in 2025, still about 38% below the peak. | [`04_severity_trend.sql`](sql/04_severity_trend.sql) |
+| 3 | **Felony arrests are at a near-20-year high.** 25,077 in 2025, the most since 2007 and 43% above 2019. | [`04_severity_trend.sql`](sql/04_severity_trend.sql) |
+| 4 | **Drug arrests went from the largest category to a small one.** 35.2% of arrests in 2007 → 5.6% in 2022 (33,668 → 2,463 arrests). The decline began around 2012, well before marijuana legalization in 2021. | [`05_drug_share.sql`](sql/05_drug_share.sql) |
+| 5 | **The Bronx has the highest arrest rate per resident.** 4,266.7 arrests per 100,000 residents in 2025, ahead of Manhattan (3,922.0) and 46% above Brooklyn. It has ranked first every year since 2022. | [`07_borough_rates.sql`](sql/07_borough_rates.sql) |
+| 6 | **Arrests concentrate in the same few precincts.** Precincts 40, 44 and 52 made the top five in all 21 years, and 40 or 44 ranked first in 20 of them. Precinct 47 has entered the top five in 6 of the last 10 years. | [`06_top_precincts.sql`](sql/06_top_precincts.sql) |
 
-Full write-up with context and caveats: [`docs/findings.md`](docs/findings.md)
+Full write-up with context and caveats: [`docs/findings.md`](docs/findings.md) · Column definitions: [`docs/data_dictionary.md`](docs/data_dictionary.md)
 
 ---
 
@@ -45,8 +43,8 @@ Full write-up with context and caveats: [`docs/findings.md`](docs/findings.md)
 ## Method
 
 1. **Stack** the historic and year-to-date files (`UNION ALL BY NAME`).
-2. **Health check** before cleaning: row counts, duplicates, missing values, date range, borough filter (`01_health_check.sql`).
-3. **Clean** (`02_clean.sql`): keep Bronx only, remove duplicate arrest keys with `ROW_NUMBER()`, label severity codes, replace blank offenses with `UNKNOWN`.
+2. **Health check** before cleaning: row counts, duplicates, missing values, date range, borough filter ([`01_health_check.sql`](sql/01_health_check.sql)).
+3. **Clean** ([`02_clean.sql`](sql/02_clean.sql)): keep Bronx only, remove duplicate arrest keys with `ROW_NUMBER()`, label severity codes, replace blank offenses with `UNKNOWN`.
 4. **Analyze** with reusable SQL patterns:
    - *Count → Copy → Calculate* for year-over-year change (`LAG`)
    - *Count → Total → Divide* for share of total (`SUM() OVER`)
@@ -64,7 +62,7 @@ bronx-arrests-analysis/
   README.md
   data/clean/     results of each query (CSV)
   sql/            01_health_check.sql → 07_borough_rates.sql, in run order
-  images/         dashboard screenshots
+  images/         dashboard screenshots (coming soon)
   docs/           findings, data quality log, data dictionary
 ```
 

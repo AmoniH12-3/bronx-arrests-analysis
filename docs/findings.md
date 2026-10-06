@@ -45,10 +45,13 @@ Each finding follows the same structure: what the data shows, how it compares, w
 - The Bronx or Manhattan has ranked first every year since 2006. The Bronx has ranked first every year since 2022, and the gap has widened.
 - **Caveat:** Manhattan's per-resident rate is inflated by commuters and visitors who are arrested there but live elsewhere.
 
-## 6. Arrests concentrate in the same precincts
+## 6. Arrests concentrate in the same few precincts
 
-- Precincts **46, 44, 40, 43 and 52** were the top five in both 2006 and 2007, only in a different order.
-- **To confirm:** whether this group holds across all 20 years.
+- Precincts **40, 44 and 52** were in the Bronx's top five for arrests in **all 21 years** (2006–2026).
+- Precincts **40 and 44** ranked first in 20 of 21 years; the only exception was 2006 (precinct 46).
+- Only seven precincts ever reached the top five.
+- **Precinct 47** is the main newcomer: absent before 2017, it has made the top five in 6 of the last 10 years.
+- **Caveat:** precincts differ in size and population, so counts show where arrests happen, not per-resident rates.
 
 ## Overall caveats
 
